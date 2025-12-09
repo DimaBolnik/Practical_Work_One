@@ -1,6 +1,13 @@
 package ru.bolnik;
 
 import ru.bolnik.task_one.Person;
+import ru.bolnik.task_three.barrier.Obstacle;
+import ru.bolnik.task_three.barrier.Track;
+import ru.bolnik.task_three.barrier.Wall;
+import ru.bolnik.task_three.participant.Action;
+import ru.bolnik.task_three.participant.Kitty;
+import ru.bolnik.task_three.participant.Man;
+import ru.bolnik.task_three.participant.Robot;
 import ru.bolnik.task_two.Animal;
 import ru.bolnik.task_two.Cat;
 import ru.bolnik.task_two.Dog;
@@ -13,10 +20,12 @@ public class Main {
         System.out.println("=========================");
         runTaskTwo();
         System.out.println("=========================");
+        runTaskThree();
     }
 
 
-    private static void runTaskOne(){
+    private static void runTaskOne() {
+        System.out.println("Заданий 1");
         Person[] persons = new Person[5];
 
         persons[0] = new Person("Ivanov Ivan", "Engineer", "ivivan@mail.com", "89001112233", 30000, 30);
@@ -38,6 +47,7 @@ public class Main {
     }
 
     private static void runTaskTwo() {
+        System.out.println("Заданий 2");
         Cat cat1 = new Cat();
         Cat cat2 = new Cat();
 
@@ -50,9 +60,33 @@ public class Main {
         dog1.run(600);
         dog1.swim(10);
 
-        // Статистика
+
         Animal.showCount();
         Cat.showCatCount();
         Dog.showDogCount();
+    }
+
+    private static void runTaskThree() {
+        System.out.println("Заданий 3");
+
+        Action[] actions = {
+                new Man(500, 2),
+                new Kitty(700, 3),
+                new Robot(1000, 5)};
+
+        Obstacle[] obstacles = {
+                new Track(600),
+                new Wall(2),
+                new Track(500),
+                new Wall(3)
+        };
+
+        for (Action action : actions) {
+            for (Obstacle obstacle : obstacles) {
+                if (!obstacle.overcome(action)) {
+                    break;
+                }
+            }
+        }
     }
 }
